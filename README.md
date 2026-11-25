@@ -14,12 +14,12 @@ A minimal, read-only dashboard that shows **six live on-chain values** from the 
 - Contract: [`0x433830E36585bdACC840E1caB419C4211bBf13f5`](https://bscscan.com/address/0x433830E36585bdACC840E1caB419C4211bBf13f5)
 - USDT (BEP-20, 18 decimals): [`0x55d398326f99059fF775485246999027B3197955`](https://bscscan.com/token/0x55d398326f99059fF775485246999027B3197955)
 - ABI: `abi.json` (verbatim project ABI, also at `src/lib/abi.json`)
-- Stack: React 18, TypeScript, Vite, viem, plain CSS
+- Stack: React 18, TypeScript, Vite, viem, plain CSS (Poppins font, inline SVG logo and icons)
 
 ## How it works
 - All six values are read on every refresh, **pinned to the same block**, and formatted with USDT's 18 decimals. There are no hardcoded amounts. Hover a value to see full precision.
 - Public, key-less BSC RPCs are tried in order with automatic fallback, and the chain ID is checked to be 56 (`src/lib/config.ts`).
-- The header shows LIVE / STALE / ERROR, the latest block and the last update time. The page auto-refreshes every **40 s**, and there is a manual refresh button.
+- The header shows LIVE / STALE / CONNECTION ERROR / LOADING, the latest block and the last update time. The page auto-refreshes every **40 s**, and there is a manual refresh button.
 - If a refresh fails, the last values stay on screen labelled **STALE**. If nothing has loaded yet, an **ERROR** state is shown. Old data is never labelled live.
 - Read-only: no wallet connection and no transactions.
 
