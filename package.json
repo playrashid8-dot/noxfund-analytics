@@ -1,0 +1,26 @@
+{
+  "name": "noxfund-site",
+  "private": true,
+  "version": "1.0.0",
+  "type": "module",
+  "scripts": {
+    "dev": "vite",
+    "build": "tsc --noEmit && vite build",
+    "preview": "vite preview --port 4173",
+    "verify": "node scripts/read.mjs"
+  },
+  "dependencies": {
+    "react": "^18.3.1",
+    "react-dom": "^18.3.1",
+    "recharts": "3.11.1",
+    "viem": "2.58.6"
+  },
+  "devDependencies": {
+    "@types/react": "^18.3.0",
+    "@types/react-dom": "^18.3.0",
+    "@vitejs/plugin-react": "^4.3.0",
+    "typescript": "7.0.2",
+    "vite": "^5.4.0",
+    "vite-plugin-singlefile": "^2.3.4"
+  }
+}

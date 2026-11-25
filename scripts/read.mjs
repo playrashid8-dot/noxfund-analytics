@@ -1,0 +1,16 @@
+import { createPublicClient, http, fallback, formatUnits, erc20Abi } from 'viem';
+import { bsc } from 'viem/chains';
+import fs from 'fs';
+const abi = JSON.parse(fs.readFileSync(new URL('../abi.json', import.meta.url)));
+const C='0x433830E36585bdACC840E1caB419C4211bBf13f5', U='0x55d398326f99059fF775485246999027B3197955';
+const rpcs=['https://bsc-dataseed.bnbchain.org','https://bsc-dataseed1.defibit.io','https://bsc-rpc.publicnode.com','https://1rpc.io/bnb','https://bsc-dataseed2.ninicoin.io'];
+export const client=createPublicClient({chain:bsc,transport:fallback(rpcs.map(u=>http(u,{timeout:15000})))});
+const r=(fn,args=[])=>client.readContract({address:C,abi,functionName:fn,args});
+const f=v=>formatUnits(v,18);
+const block=await client.getBlockNumber();
+const [ci,gd,gwp,gwr,tp,tpr,tu,gc,bal]=await Promise.all([r('contractInfo'),r('globalDeposited'),r('globalWithdrawnPrincipal'),r('globalWithdrawnROI'),r('totalParticipants'),r('totalPendingReferrals'),r('totalUsernames'),r('getConstants'),client.readContract({address:U,abi:erc20Abi,functionName:'balanceOf',args:[C]})]);
+console.log('block',block);
+console.log('contractInfo',ci.map(x=>x.toString()));
+console.log({globalDeposited:f(gd),globalWithdrawnPrincipal:f(gwp),globalWithdrawnROI:f(gwr),totalParticipants:tp,totalPendingReferrals:f(tpr),totalUsernames:tu,usdtBalance:f(bal),ciBalance:f(ci[0]),ciAvailable:f(ci[1]),active:f(gd-gwp)});
+console.log('match', ci[0]===bal, ci[2]===tpr, ci[3]===gd, ci[4]===gwr, ci[5]===gwp, ci[6]===tp, 'bal-pending', f(bal-tpr), 'avail', f(ci[1]));
+console.log('constants',gc.map(x=>x.toString()));
