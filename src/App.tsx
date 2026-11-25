@@ -9,7 +9,7 @@ type Key = 'globalDeposited' | 'globalWithdrawnPrincipal' | 'globalWithdrawnROI'
 
 const CARDS: { key: Key; title: string; src: string; tone: string; Icon: ComponentType<{ id: string }> }[] = [
   { key: 'globalDeposited', title: 'Total Deposited', src: 'globalDeposited()', tone: 'blue', Icon: IconCoins },
-  { key: 'globalWithdrawnPrincipal', title: 'Total Principal Returned', src: 'globalWithdrawnPrincipal()', tone: 'purple', Icon: IconReturn },
+  { key: 'globalWithdrawnPrincipal', title: 'Principal Returned', src: 'globalWithdrawnPrincipal()', tone: 'purple', Icon: IconReturn },
   { key: 'globalWithdrawnROI', title: 'Total ROI Paid', src: 'globalWithdrawnROI()', tone: 'gold', Icon: IconChart },
   { key: 'usdtBalance', title: 'Contract USDT Balance', src: 'USDT.balanceOf(contract)', tone: 'green', Icon: IconWallet },
   { key: 'availableBalance', title: 'Available Contract Balance', src: 'contractInfo().availableBalance_', tone: 'cyan', Icon: IconShield },
